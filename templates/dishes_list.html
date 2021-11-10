@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>{{ country.name }} кухня</title>
+{% endblock %}
+
+{% block logo %}
+<a class="navbar-brand" href="{% url 'hello_page' %}">
+    <img src="{{ country.flag.url }}" alt="Country flag" style="width:50px; height:35px" class="rounded-pill">
+</a>
+{% endblock %}
+
+
+{% block content %}
+    <blockquote class="blockquote text-left">
+        <h2 class="mb-0">{{ country.name }} кухня</h2>
+        <p class="mb-0"><cite>{{ country.discription }}</cite></p>
+    </blockquote>
+
+    {% for dish in dishes %}
+    <hr>
+    <div class="d-flex">
+        <div class="flex-shrink-0">
+            <img src="{{ dish.image.url }}" alt="Dish image" class="align-self-center rounded" style="width:150px; height:150px">
+        </div>
+        <div class="flex-grow-1 ms-3">
+            <a role="button" class="h5 text-decoration-none" href="#">{{ dish.name }}</a>
+            <p>{{ dish.discription }}</p>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+
+{% endblock %}

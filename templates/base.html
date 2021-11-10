@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        {% block title %}
+            <title>Добро пожаловать</title>
+        {% endblock %}
+            <link rel="stylesheet" href="{% static 'css\bootstrap.css' %}"/>
+            <script type="text/javascript" src="{% static 'js\bootstrap.js' %}"></script>
+    </head>
+    <body>
+
+        {% block menu %}
+            <nav class="navbar navbar-expand-sm bg-warning navbar-light">
+                <div class="container-fluid">
+                    <!-- Links -->
+                    <ul class="navbar-nav" style="font-size:large">
+                        {% block logo %}
+                            <a class="navbar-brand" href="{% url 'hello_page' %}">
+                                <img src="{% static 'img\hello_logo.gif' %}" alt="Avatar Logo" style="width:50px; height:35px" class="rounded-pill">
+                            </a>
+                        {% endblock %}
+                        <li class="nav-item">
+                            <a role="button" href="{% url 'dishes_list' '1' %}" {% if country.id == 1 %} class="nav-link active" {% else %} class="nav-link" {% endif %}>Мексиканская</a>
+                        </li>
+                        <li class="nav-item">
+                            <a role="button" href="{% url 'dishes_list' '2' %}" {% if country.id == 2 %} class="nav-link active" {% else %} class="nav-link" {% endif %}>Итальянская</a>
+                        </li>
+                        <li class="nav-item">
+                            <a role="button" href="{% url 'dishes_list' '3' %}" {% if country.id == 3 %} class="nav-link active" {% else %} class="nav-link" {% endif %}>Русская</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Все</a>
+                            <ul class="dropdown-menu">
+                                {% for country in countries %}
+                                    <li><a class="dropdown-item" href="{% url 'dishes_list' country.id %}">{{ country.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <button class="btn btn-success" type="button">Войти</button>
+                    </form>
+                </div>
+            </nav>
+        {% endblock %}
+
+        {% block content %}
+            <img src="{% static 'img\hello_food.jpg' %}" alt="Hello pic" class="rounded mx-auto d-block">
+            <blockquote class="blockquote text-center">
+                <h2 class="mb-0">Добро пожаловать на сайт!</h2>
+                <h3 class="mb-0"><cite>Здесь содержатся лучшее рецепты собранные по всему миру!</cite></h3>
+            </blockquote>
+        {% endblock %}
+
+    </body>
+</html>
